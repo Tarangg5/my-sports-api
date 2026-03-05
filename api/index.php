@@ -1,16 +1,12 @@
 <?php
-// 1. Force clear any buffer to prevent extra spaces
+// Clear any buffer
 ob_start();
-ob_clean();
 
-// 2. Set strict headers for OTT Navigator & IPTV Apps
-header('Content-Type: application/vnd.apple.mpegurl');
-header('Content-Disposition: inline; filename="playlist.m3u"');
-header('Cache-Control: no-cache, must-revalidate');
+// Change to text/plain - this is more compatible with some IPTV apps
+header('Content-Type: text/plain; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
 
-// 3. Fetch the JSON data from your source
 $source_url = "https://sports.pfy.workers.dev";
-
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $source_url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
